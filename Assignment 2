@@ -1,0 +1,161 @@
+class BankAccount:
+    def __init__(self, account_number, initial_balance=0):
+        """
+        Initialize the bank account with an account number and an optional initial balance.
+        :param account_number: str
+        :param initial_balance: float
+        """
+        self.account_number = account_number
+        self.balance = initial_balance
+
+    def deposit(self, amount):
+        """
+        Deposit money into the account.
+        :param amount: float
+        """
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited {amount:.2f}. New balance: {self.balance:.2f}")
+        else:
+            print("Deposit amount must be positive.")
+
+    def withdraw(self, amount):
+        """
+        Withdraw money from the account.
+        :param amount: float
+        """
+        if amount > 0:
+            if amount <= self.balance:
+                self.balance -= amount
+                print(f"Withdrew {amount:.2f}. New balance: {self.balance:.2f}")
+            else:
+                print("Insufficient balance.")
+        else:
+            print("Withdrawal amount must be positive.")
+
+    def check_balance(self):
+        """
+        Check and return the current balance of the account.
+        """
+        print(f"Current balance: {self.balance:.2f}")
+        return self.balance
+
+# Example usage:
+if __name__ == "__main__":
+    # Create a new account with an initial balance of 1000
+    account = BankAccount("123456789", 1000)
+
+    while True:
+        print("\n1. Check Balance\n2. Deposit Money\n3. Withdraw Money\n4. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            account.check_balance()
+        elif choice == "2":
+            amount = float(input("Enter amount to deposit: "))
+            account.deposit(amount)
+        elif choice == "3":
+            amount = float(input("Enter amount to withdraw: "))
+            account.withdraw(amount)
+        elif choice == "4":
+            print("Exiting. Have a nice day!")
+            break
+        else:
+            print("Invalid choice. Please try again.")class Library:
+    def __init__(self, book_name, author, available=True):
+        """
+        Initialize the library book with details.
+        :param book_name: str
+        :param author: str
+        :param available: bool (default is True)
+        """
+        self.book_name = book_name
+        self.author = author
+        self.available = available
+
+    def check_out(self):
+        """
+        Check out a book if available.
+        """
+        if self.available:
+            self.available = False
+            print(f"'{self.book_name}' by {self.author} has been checked out.")
+        else:
+            print(f"'{self.book_name}' by {self.author} is currently unavailable.")
+
+    def return_book(self):
+        """
+        Return a book to make it available.
+        """
+        if not self.available:
+            self.available = True
+            print(f"'{self.book_name}' by {self.author} has been returned and is now available.")
+        else:
+            print(f"'{self.book_name}' by {self.author} was not checked out.")
+
+    def display_status(self):
+        """
+        Display the availability status of the book.
+        """
+        status = "Available" if self.available else "Checked out"
+        print(f"'{self.book_name}' by {self.author} is {status}.")
+
+# Example usage:
+if __name__ == "__main__":
+    # Create a list of book objects
+    library_books = [
+        Library("1984", "George Orwell"),
+        Library("To Kill a Mockingbird", "Harper Lee"),
+        Library("The Great Gatsby", "F. Scott Fitzgerald"),
+    ]
+
+    while True:
+        print("\nLibrary Menu:\n1. Display all books\n2. Check out a book\n3. Return a book\n4. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            print("\nAvailable Books:")
+            for book in library_books:
+                book.display_status()
+
+        elif choice == "2":
+            book_name = input("Enter the name of the book to check out: ")
+            for book in library_books:
+                if book.book_name.lower() == book_name.lower():
+                    book.check_out()
+                    break
+            else:
+                print("Book not found in the library.")
+
+        elif choice == "3":
+            book_name = input("Enter the name of the book to return: ")
+            for book in library_books:
+                if book.book_name.lower() == book_name.lower():
+                    book.return_book()
+                    break
+            else:
+                print("Book not found in the library.")
+
+        elif choice == "4":
+            print("Exiting the library system. Have a great day!")
+            break
+
+        else:
+            print("Invalid choice. Please try again.")
+            class Vehicle:
+    def move(self):
+        print("This vehicle is moving.")
+
+class Car(Vehicle):
+    def move(self):
+        print("Driving on the road")
+
+class Bicycle(Vehicle):
+    def move(self):
+        print("Pedaling on the road")
+
+# Demonstrating polymorphism
+vehicles = [Car(), Bicycle()]
+
+for vehicle in vehicles:
+    vehicle.move()
